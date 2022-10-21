@@ -1,0 +1,57 @@
+---
+title: "MU4_spatsurvival"
+author: "Marissa Wright-LaGreca"
+date: "18/10/2022"
+output: html_document
+---
+
+getwd()
+
+
+Data=read.table("highdose_newnew2T17.txt",header=TRUE)
+head(Data)
+
+********Cox Analysis*******
+  
+install.packages("survival")
+
+install.packages("survminer")
+
+install.packages("dplyr")
+
+install.packages("ggplot2")
+
+install.packages("ggpubr")
+
+***
+  
+library(survival)
+
+library(survminer)
+
+library(dplyr)
+
+library(ggplot2)
+
+library(ggpubr)
+
+#survival prob
+
+surv_object = Surv(time = Data$TE, event = Data$Outcome)
+
+surv_object
+
+fit1 = survfit(surv_object~treatment, data=Data)
+summary(fit1)
+ggsurvplot(fit1, data=Data, pval = TRUE, legend = "bottom", legend.title="Treatment", font.legend =c(9,"plain","black"), legend.labs=c("Control","Heat", "Probiotic","Probiotic + heat")
+
+#watch treatment labels (follow order given in survfit stats - order is alphabetical for survival prob plot)
+
+#hazard ratio
+
+fit.coxph =coxph(Surv(TE,Outcome)~treatment,data = Data)
+
+summary(fit.coxph)
+
+ggforest(fit.coxph, data=Data)
+
