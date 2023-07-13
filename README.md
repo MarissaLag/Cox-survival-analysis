@@ -1,2 +1,2 @@
 # Cox-survival-analysis
-Cox survival with data from spat (Pacific oyster) survival challenge against Vibrio aest.. 
+Cox survival and hazard ratio analysis with data from spat (Pacific oyster) survival challenge against Vibrio aest.. 
